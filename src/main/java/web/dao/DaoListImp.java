@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class UserDaoListImp implements UserDao {
+public class DaoListImp implements Dao<User> {
     private static long USER_COUNT;
     private List<User> users;
 
@@ -20,31 +20,38 @@ public class UserDaoListImp implements UserDao {
     }
 
     @Override
-    public List<User> index() {
+    public List<User> findAll() {
         return users;
     }
 
     @Override
-    public User getById(long id) {
+    public User findOne(long id) {
         return users.stream().filter(user -> user.getId() == id).findAny().orElse(new User());
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(User user) {
+        users.removeIf(u -> u.equals(user));
+    }
+
+    @Override
+    public void deleteById(long id) {
         users.removeIf(user -> user.getId() == id);
     }
 
     @Override
-    public void update(long id, String name, String lastName, int age) {
-        User user = getById(id);
-        user.setId(id);
-        user.setName(name);
-        user.setLastName(lastName);
-        user.setAge(age);
+    public User update(User newUser) {
+        User user = findOne(newUser.getId());
+        user.setId(newUser.getId());
+        user.setName(newUser.getName());
+        user.setLastName(newUser.getLastName());
+        user.setAge(newUser.getAge());
+        return user;
     }
 
     @Override
-    public void create(String name, String lastName, int age) {
-        users.add(new User(++USER_COUNT, name, lastName, age));
+    public void create(User user) {
+        user.setId(++USER_COUNT);
+        users.add(user);
     }
 }

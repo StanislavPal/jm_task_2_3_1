@@ -22,7 +22,7 @@ public class UsersController {
     @GetMapping()
     public String index(Model model) {
         System.out.println("==========get index============");
-        model.addAttribute("users", userService.index());
+        model.addAttribute("users", userService.findAll());
         return "users/index";
     }
 
@@ -48,18 +48,9 @@ public class UsersController {
         return "redirect:/users";
     }
 
-//    @PostMapping()
-//    public String create(@RequestParam("name") String name,
-//                       @RequestParam("lastname") String lastName,
-//                       @RequestParam("age") int age) {
-//        userService.create(name, lastName, age);
-//        System.out.println("-----post--------");
-//        return "redirect:/users";
-//    }
-
     @PostMapping()
     public String create(@ModelAttribute("user") User user) {
-        userService.create(user.getName(), user.getLastName(), user.getAge());
+        userService.create(user);
         System.out.println("-----post--------");
         System.out.println(user);
         return "redirect:/users";
@@ -68,10 +59,7 @@ public class UsersController {
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("user") User user,
                          @PathVariable("id") long id) {
-        userService.update(id,
-                user.getName(),
-                user.getLastName(),
-                user.getAge());
+        userService.update(id, user);
         return "redirect:/users";
     }
 }

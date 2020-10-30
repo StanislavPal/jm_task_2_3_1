@@ -1,17 +1,44 @@
 package web.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import web.dao.Dao;
 import web.model.User;
 
 import java.util.List;
 
-public interface UserService {
-    public List<User> index();
+@Service
+public class UserService{
 
-    public User getById(long id);
+    @Autowired
+    @Qualifier("daoHiberImp")
+    private Dao<User> dao;
 
-    public void delete(long id);
+    @Transactional(readOnly = true)
+    public List<User> findAll() {
+        return dao.findAll();
+    }
 
-    public void update(long id, String name, String lastName, int age);
+    @Transactional
+    public User getById(long id) {
+        return dao.findOne(id);
+    }
 
-    public void create(String name, String lastName, int age);
+    @Transactional
+    public void delete(long id) {
+        dao.deleteById(id);
+    }
+
+    @Transactional
+    public void update(long id, User user) {
+        user.setId(id);
+        dao.update(user);
+    }
+
+    @Transactional
+    public void create(User user) {
+        dao.create(user);
+    }
 }
