@@ -13,7 +13,7 @@ import java.util.List;
 public class UserService{
 
     @Autowired
-    @Qualifier("daoHiberImp")
+    @Qualifier("daoJpaImp")
     private Dao<User> dao;
 
     @Transactional(readOnly = true)
