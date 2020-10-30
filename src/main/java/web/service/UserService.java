@@ -32,8 +32,7 @@ public class UserService{
     }
 
     @Transactional
-    public void update(long id, User user) {
-        user.setId(id);
+    public void update(User user) {
         dao.update(user);
     }
 

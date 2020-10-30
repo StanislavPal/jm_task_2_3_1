@@ -40,13 +40,12 @@ public class DaoListImp implements Dao<User> {
     }
 
     @Override
-    public User update(User newUser) {
+    public void update(User newUser) {
         User user = findOne(newUser.getId());
         user.setId(newUser.getId());
         user.setName(newUser.getName());
         user.setLastName(newUser.getLastName());
         user.setAge(newUser.getAge());
-        return user;
     }
 
     @Override

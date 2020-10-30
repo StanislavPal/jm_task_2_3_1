@@ -18,7 +18,6 @@ public class UsersController {
         this.userService = userService;
     }
 
-    //Получим всех пользователей из дао и передадим в представление на отображение
     @GetMapping()
     public String index(Model model) {
         System.out.println("==========get index============");
@@ -26,7 +25,6 @@ public class UsersController {
         return "users/index";
     }
 
-    //Получим одного юзера по его id и передадим в представление на отображение
     @GetMapping("/{id}")
     public String showById(@PathVariable("id") long id,
                                Model model) {
@@ -57,9 +55,8 @@ public class UsersController {
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("user") User user,
-                         @PathVariable("id") long id) {
-        userService.update(id, user);
+    public String update(@ModelAttribute("user") User user) {
+        userService.update(user);
         return "redirect:/users";
     }
 }

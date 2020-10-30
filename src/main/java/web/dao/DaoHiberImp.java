@@ -12,37 +12,38 @@
 //@Repository
 //public class DaoHiberImp implements Dao<User> {
 //
-//   @Autowired
-//   private SessionFactory sessionFactory;
+//    @Autowired
+//    private SessionFactory sessionFactory;
 //
-//   @Override
-//   @SuppressWarnings("unchecked")
-//   public List<User> findAll() {
-//      TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("from User");
-//      return query.getResultList();
-//   }
+//    @Override
+//    @SuppressWarnings("unchecked")
+//    public List<User> findAll() {
+//        return sessionFactory
+//                .getCurrentSession()
+//                .createQuery("from User")
+//                .getResultList();
+//    }
 //
-//   @Override
-//   public User findOne(long id) {
-//      String hql = "from User u where u.id = :id";
-//      TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(hql);
-//      query.setParameter("id", id);
-//      User user = query.getSingleResult();
-//      return user;
-//   }
+//    @Override
+//    public User findOne(long id) {
+//        String hql = "from User u where u.id = :id";
+//        TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(hql);
+//        query.setParameter("id", id);
+//        User user = query.getSingleResult();
+//        return user;
+//    }
 //
-//   @Override
-//   public void deleteById(long id) {
-//      Session session = sessionFactory.getCurrentSession();
-//      User user = session.get(User.class, id);
-//      session.delete(user);
-//   }
+//    @Override
+//    public void deleteById(long id) {
+//        Session session = sessionFactory.getCurrentSession();
+//        User user = session.get(User.class, id);
+//        session.delete(user);
+//    }
 //
-//   @Override
-//   public User update(User user) {
-//      sessionFactory.getCurrentSession().update(user);
-//      return findOne( user.getId() );
-//   }
+//    @Override
+//    public void update(User user) {
+//        sessionFactory.getCurrentSession().update(user);
+//    }
 //
 //    @Override
 //    public void delete(User user) {
@@ -50,7 +51,7 @@
 //    }
 //
 //    @Override
-//   public void create(User user) {
-//      sessionFactory.getCurrentSession().save(user);
-//   }
+//    public void create(User user) {
+//        sessionFactory.getCurrentSession().save(user);
+//    }
 //}

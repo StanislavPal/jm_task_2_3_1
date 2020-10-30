@@ -11,7 +11,7 @@ public interface Dao<T> {
 
     public void deleteById(long entityId);
 
-    public T update(T entity);
+    public void update(T entity);
 
     public void create(T entity);
 }
